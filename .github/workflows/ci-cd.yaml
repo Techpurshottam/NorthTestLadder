@@ -37,6 +37,7 @@ jobs:
     needs: build
 
     steps:
+      - name: Deploy Docker Container
         run: |
-          echo "DEPLOYED_To_Container"
+          echo "DEPLOYED_To_CONTAINER"
           docker run -p 8088:3000 -d parsuboy666/digimailerregistry:latest
