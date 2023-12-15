@@ -26,7 +26,11 @@ jobs:
         run: |
           echo "DEPLOYED_FROM=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
           docker build -t nodeapp:1 .
-          docker tag docker.io/library/nodeapp:1 docker.io/parsuboy666/digimailerregistry:n1.0
+
+      - name: Tag Docker Image
+        run: |
+	  docker tag nodeapp:1 parsuboy666/digimailerregistry:n1.0
+
 
   deploy:
     runs-on: ubuntu-latest
