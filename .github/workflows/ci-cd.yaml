@@ -26,7 +26,7 @@ jobs:
         run: |
           echo "DEPLOYED_FROM=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
           docker build -t nodeapp:npm1 .
-          docker tag nodeapp:npm1 digimailerregistry:nop1
+          docker tag nodeapp:npm1 parsuboy666/napp:latest
           docker images
 
   deploy:
@@ -39,4 +39,4 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker push parsuboy666/digimailerregistry:nop1
+          docker push parsuboy666/napp:latest
