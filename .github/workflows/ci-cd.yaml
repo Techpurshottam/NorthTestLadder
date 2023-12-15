@@ -28,9 +28,6 @@ jobs:
           docker build -t nodeapp:1 .
           docker images
 
-	  #docker tag nodeapp:1 parsuboy666/digimailerregistry:n1.0
-
-
   deploy:
     runs-on: ubuntu-latest
 
