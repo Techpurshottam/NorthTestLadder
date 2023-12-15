@@ -1,0 +1,50 @@
+
+image:
+  repository: parsuboy666/digimailerregistry
+  tag: latest
+service:
+  port: 3000
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-app
+  template:
+    metadata:
+      labels:
+        app: node-app
+    spec:
+      containers:
+      - name: node-app-container
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: 3000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-service
+spec:
+  selector:
+    app: node-app
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: 3000
+  type: LoadBalancer
+
+
+# This are instructions to create and apply helm chart in our menifest
+
+# helm create node-app-chart
+# After chnages
+# helm install node-app-release node-app-chart
