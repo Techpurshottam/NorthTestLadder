@@ -6,8 +6,6 @@ COPY . .
 
 RUN npm install --production
 
-USER app
-
 EXPOSE 3000
 
 CMD ["npm", "start"]
